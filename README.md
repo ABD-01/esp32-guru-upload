@@ -122,8 +122,12 @@ For a Guru Meditation to be triggered, there has to be a piece of notorious code
 I have written [crash\_app.c](main/crash_app.c), which just calls a few functions (to showcase stack depth) and writes to a prohibited location:
 
 ```c
-volatile uint32_t *bat_ptr = (uint32_t *)0xDEADBEEF;
-*bat_ptr                   = 0x12345678;
+==================== THREAD 1 (TCB: 0x3ffb94b0, name: 'CrashTask') =====================
+#0  0x400da38f in baz (val=99) at esp32-guru-upload/main/crash_app.c:49
+#1  bar (val=67) at esp32-guru-upload/main/crash_app.c:36
+#2  foo (val=67) at esp32-guru-upload/main/crash_app.c:28
+#3  CrashTask (pvParameters=<optimized out>) at esp32-guru-upload/main/crash_app.c:20
+#4  0x40085f54 in vPortTaskWrapper (pxCode=0x400da2f0 <CrashTask>, pvParameters=0x0) at esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
 ```
 
 [ESP-IDF (Espressif IoT Development Framework)](https://github.com/espressif/esp-idf) through its `menuconfig` provides an option for coredumps to be sent over UART or saved in Flash. See [sdkconfig](./sdkconfig) or run `idf.py menuconfig`:
