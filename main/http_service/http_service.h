@@ -1,6 +1,7 @@
 #ifndef __HTTP_SERVICE_H
 #define __HTTP_SERVICE_H
 
+#include "esp_http_server.h"
 #include "esp_http_client.h"
 
 #ifndef CHUNK_SIZE

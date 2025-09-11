@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="mb-4">Coredump Files</h1>
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr><th>Filename</th><th>Timestamp</th><th>Size</th></tr>
+    </thead>
+    <tbody>
+        {% if files %}
+            {% for f in files %}
+                <tr>
+                    <td><a href="/coredump/{{ f.name }}">{{ f.name }}</a></td>
+                    <td>{{ f.timestamp }}</td>
+                    <td>{{ f.size }} bytes</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr><td colspan="3">No coredumps yet</td></tr>
+        {% endif %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="mb-4">{{ filename }}</h1>
+<pre style="background:#1e1e1e; color:#dcdcdc; padding:1rem; border-radius:5px; white-space: pre-wrap;">
+{{ output }}
+</pre>
+<a href="/" class="btn btn-primary mt-3">Back</a>
+{% endblock %}

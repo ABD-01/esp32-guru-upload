@@ -19,6 +19,7 @@ grep -qxF "alias get_idf='. /workspaces/esp/esp-idf/export.sh'" ~/.bashrc || \
 
 # Install pygments for syntax highlighting
 pip3 install pygments --break-system-packages
+pip3 install flask
 
 # Download .gdbinit
 wget -P ~ https://git.io/.gdbinit

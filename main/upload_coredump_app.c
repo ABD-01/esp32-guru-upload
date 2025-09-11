@@ -90,6 +90,15 @@ void UploadCoredumpTask(void *pvParameters)
     ESP_APP_LOGI("Upload finished, status = %d", status);
     // HTTP part [end]
 
+    // delete if status is HttpStatus_Ok
+    if (status == HttpStatus_Ok)
+    {
+        if (esp_core_dump_image_erase() != ESP_OK) {
+            ESP_APP_LOGE("Failed to erase coredump (%d)", err);
+        }
+        ESP_APP_LOGI("Coredump erased successfully");
+    }
+
     vTaskDelete(NULL);
 
 }

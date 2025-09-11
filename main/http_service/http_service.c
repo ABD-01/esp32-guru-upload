@@ -79,7 +79,7 @@ esp_err_t http_post_chunks(const char *uri, const uint8_t *data, size_t total_le
 
     int status = esp_http_client_get_status_code(client);
     ESP_APP_LOGI("POST finished, status = %d", status);
-    if (status != 200) {
+    if (status != HttpStatus_Ok) {
         ESP_APP_LOGE("HTTP POST request failed with status %d", status);
         err = ESP_FAIL;
     }
