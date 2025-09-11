@@ -43,9 +43,12 @@ RUN ./configure --target-list=xtensa-softmmu \
 WORKDIR /workspaces/esp
 RUN git clone -b v5.5.1 --recursive https://github.com/espressif/esp-idf.git --depth 1 && \
     cd esp-idf && \
-    ./install.sh
+    ./install.sh && \
+    . ./export.sh
 
 RUN echo "alias get_idf='. /workspaces/esp/esp-idf/export.sh'" >> ~/.bashrc
 
 # terminal colors with xterm
 ENV TERM xterm
+
+CMD [ "/bin/bash" ]

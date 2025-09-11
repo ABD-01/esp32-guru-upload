@@ -37,5 +37,5 @@
         }
     },
     "forwardPorts": [8080],
-    "postCreateCommand": "pip3 install pygments --break-system-packages && wget -P ~ https://git.io/.gdbinit"
+    "postCreateCommand": ".devcontainer/setup_esp.sh"
 }
