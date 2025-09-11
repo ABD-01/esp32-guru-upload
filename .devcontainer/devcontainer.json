@@ -1,0 +1,41 @@
+{
+    "build": { "dockerfile": "Dockerfile"},
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "editor.fontSize": 16,
+                "terminal.integrated.fontSize": 16,
+                "workbench.iconTheme": "vs-seti",
+                "editor.minimap.enabled": false,
+                "workbench.colorTheme": "Gruvbox Dark Hard",
+                "workbench.preferredDarkColorTheme": "Gruvbox Dark Hard",
+                "editor.wordWrapColumn": 120,
+                "workbench.startupEditor": "none",
+                "editor.useTabStops": false,
+                "files.trimTrailingWhitespace": true,
+                "git.autorefresh": false,
+                "terminal.integrated.cursorBlinking": true,
+                "terminal.integrated.cursorStyle": "line",
+                "debug.console.fontSize": 16,
+                "editor.rulers": [120],
+                "terminal.integrated.sendKeybindingsToShell": true,
+                "extensions.ignoreRecommendations": true,
+                "remote.autoForwardPorts": false
+            },
+            "extensions": [
+                "ms-vscode.cpptools",
+                "davidbwaters.macos-modern-theme",
+                "maziac.hex-hover-converter",
+                "ms-vscode.hexeditor",
+                "ms-vscode.cmake-tools",
+                "ms-python.python",
+                "ms-python.vscode-python-envs",
+                "anhoder.gruvbox-anhoder",
+                "mhutchie.git-graph",
+                "espressif.esp-idf-extension"
+            ]
+        }
+    },
+    "forwardPorts": [8080],
+    "postCreateCommand": "pip3 install pygments --break-system-packages && wget -P ~ https://git.io/.gdbinit"
+}
