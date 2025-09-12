@@ -13,9 +13,6 @@ static int baz(int val);
 void CrashTask(void *pvParameters)
 {
     g_xyz = esp_cpu_get_cycle_count() + 5928;
-    if (!g_xyz) {
-        g_xyz = 42;
-    }
 
     while(1)
     {
