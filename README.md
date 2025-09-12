@@ -32,7 +32,6 @@ In another terminal:
 
 ```bash
 cd esp32-guru-upload
-get_idf   # setup ESP-IDF environment
 python endpoint_app.py
 ```
 
@@ -113,7 +112,7 @@ virt                 virt machine (dc232b)
 
 The next thing used is the [ESP-IDF (Espressif IoT Development Framework)](https://github.com/espressif/esp-idf). Just follow the manual for installation.
 
-I have set up all the installation into the devcontainer so you don’t have to worry about installing any prerequisite software.
+I have set up all the installation into the devcontainer so you don't have to worry about installing any prerequisite software.
 
 ### Implementation
 
