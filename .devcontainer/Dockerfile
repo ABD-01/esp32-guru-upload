@@ -38,16 +38,6 @@ RUN ./configure --target-list=xtensa-softmmu \
     make -j$(nproc) && \
     make install
 
-
-# Set working directory for ESP-IDF
-WORKDIR /workspaces/esp
-RUN git clone -b v5.5.1 --recursive https://github.com/espressif/esp-idf.git --depth 1 && \
-    cd esp-idf && \
-    ./install.sh && \
-    . ./export.sh
-
-RUN echo "alias get_idf='. /workspaces/esp/esp-idf/export.sh'" >> ~/.bashrc
-
 # terminal colors with xterm
 ENV TERM xterm
 

@@ -14,8 +14,9 @@ fi
 . /workspaces/esp/esp-idf/export.sh
 
 # Add alias to user bashrc
-grep -qxF "alias get_idf='. /workspaces/esp/esp-idf/export.sh'" ~/.bashrc || \
-    echo "alias get_idf='. /workspaces/esp/esp-idf/export.sh'" >> ~/.bashrc
+echo "alias get_idf='. /workspaces/esp/esp-idf/export.sh'" >> ~/.bashrc
+echo ". /workspaces/esp/esp-idf/export.sh" >> ~/.bashrc
+source ~/.bashrc
 
 # Install pygments for syntax highlighting
 pip3 install pygments --break-system-packages
