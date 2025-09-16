@@ -1,0 +1,217 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Coredump</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Coredumps</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" href="../../esp_server">ESP Server</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../">README</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../device_log/">Device Log</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container my-4">
+
+<h1 class="mb-4">coredump-1762599836.elf</h1>
+<pre style="background:#1e1e1e; color:#dcdcdc; padding:1rem; border-radius:5px; white-space: pre-wrap;">
+Executing action: coredump-info
+===============================================================
+==================== ESP32 CORE DUMP START ====================
+
+Crashed task handle: 0x3ffb94b0, name: &#39;CrashTask&#39;, GDB name: &#39;process 1073452208&#39;
+Crashed task is not in the interrupt context
+
+================== CURRENT THREAD REGISTERS ===================
+exccause       0x14 (InstFetchProhibitedCause)
+excvaddr       0xeeeedead
+epc1           0x400d9b1c
+epc2           0x0
+epc3           0x0
+epc4           0x0
+epc5           0x0
+epc6           0x0
+eps2           0x0
+eps3           0x0
+eps4           0x0
+eps5           0x0
+eps6           0x0
+pc             0xeeeedead          0xeeeedead
+lbeg           0x0                 0
+lend           0x0                 0
+lcount         0x0                 0
+sar            0x4                 4
+ps             0x60020             393248
+threadptr      &lt;unavailable&gt;
+br             &lt;unavailable&gt;
+scompare1      &lt;unavailable&gt;
+acclo          &lt;unavailable&gt;
+acchi          &lt;unavailable&gt;
+m0             &lt;unavailable&gt;
+m1             &lt;unavailable&gt;
+m2             &lt;unavailable&gt;
+m3             &lt;unavailable&gt;
+expstate       &lt;unavailable&gt;
+f64r_lo        &lt;unavailable&gt;
+f64r_hi        &lt;unavailable&gt;
+f64s           &lt;unavailable&gt;
+fcr            &lt;unavailable&gt;
+fsr            &lt;unavailable&gt;
+a0             0x80085f54          -2146934956
+a1             0x3ffb9400          1073452032
+a2             0xac769185          -1401515643
+a3             0x4d                77
+a4             0x3ffb33c4          1073427396
+a5             0xdeadbeef          -559038737
+a6             0xe                 14
+a7             0x3f415afc          1061247740
+a8             0x800da396          -2146589802
+a9             0x3ffb9370          1073451888
+a10            0x34                52
+a11            0x34                52
+a12            0x10                16
+a13            0xffffffff          -1
+a14            0x0                 0
+a15            0xfffffffd          -3
+
+==================== CURRENT THREAD STACK =====================
+#0  0xeeeedead in ?? ()
+#1  0xc0085f54 in ?? ()
+
+======================== THREADS INFO =========================
+  Id   Target Id          Frame
+* 1    process 1073452208 0xeeeedead in ?? ()
+  2    process 1073413076 0x4000bff0 in _xtos_set_intlevel ()
+  3    process 1073413432 0x40083f02 in esp_cpu_wait_for_intr () at /workspaces/esp/esp-idf/components/esp_hw_support/cpu.c:64
+  4    process 1073413788 0x40083f02 in esp_cpu_wait_for_intr () at /workspaces/esp/esp-idf/components/esp_hw_support/cpu.c:64
+  5    process 1073449688 0x40083ac8 in crosscore_int_ll_trigger_interrupt (core_id=0) at /workspaces/esp/esp-idf/components/hal/esp32/include/hal/crosscore_int_ll.h:35
+  6    process 1073410580 0x4000bff0 in _xtos_set_intlevel ()
+  7    process 1073412320 0x4000bff0 in _xtos_set_intlevel ()
+  8    process 1073411964 0x4000bff0 in _xtos_set_intlevel ()
+
+
+       TCB             NAME PRIO C/B  STACK USED/FREE
+---------- ---------------- -------- ----------------
+0x3ffb94b0        CrashTask      5/5         288/1748
+0x3ffafbd4             main      1/1         688/3396
+0x3ffafd38            IDLE0      0/0         416/1104
+0x3ffafe9c            IDLE1      0/0         416/1116
+0x3ffb8ad8       RandomTask      5/5         464/3628
+0x3ffaf214             ipc0    24/24          448/560
+0x3ffaf8e0        esp_timer    22/22         464/3624
+0x3ffaf77c             ipc1    24/24          448/568
+
+==================== THREAD 1 (TCB: 0x3ffb94b0, name: &#39;CrashTask&#39;) =====================
+#0  0xeeeedead in ?? ()
+#1  0xc0085f54 in ?? ()
+
+==================== THREAD 2 (TCB: 0x3ffafbd4, name: &#39;main&#39;) =====================
+#0  0x4000bff0 in _xtos_set_intlevel ()
+#1  0x40086265 in vPortClearInterruptMaskFromISR (prev_level=&lt;optimized out&gt;) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/include/freertos/portmacro.h:560
+#2  vPortExitCritical (mux=0x3ffb0118 &lt;xKernelLock&gt;) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:514
+#3  0x40086b66 in prvAddNewTaskToReadyList (pxNewTCB=0x3ffb94b0 &lt;lb_env+140&gt;) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:1333
+#4  0x4008855c in xTaskCreatePinnedToCore (pxTaskCode=&lt;optimized out&gt;, pcName=0x3f404dac &#34;CrashTask&#34;, usStackDepth=2048, pvParameters=0x0, uxPriority=5, pxCreatedTask=0x0, xCoreID=xCoreID@entry=2147483647) at /workspaces/esp/esp-idf/components/freertos/esp_additions/freertos_tasks_c_additions.h:270
+#5  0x400da0bb in xTaskCreate (pxTaskCode=&lt;optimized out&gt;, pcName=0x3f404dac &#34;CrashTask&#34;, usStackDepth=2048, pvParameters=0x0, uxPriority=5, pxCreatedTask=0x0) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/include/freertos/task.h:394
+#6  app_main () at /workspaces/esp/esp32-guru-upload/main/guru-upload.c:29
+#7  0x4012e43a in main_task (args=0x0) at /workspaces/esp/esp-idf/components/freertos/app_startup.c:208
+#8  0x40085f54 in vPortTaskWrapper (pxCode=0x4012e398 &lt;main_task&gt;, pvParameters=0x0) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+
+==================== THREAD 3 (TCB: 0x3ffafd38, name: &#39;IDLE0&#39;) =====================
+#0  0x40083f02 in esp_cpu_wait_for_intr () at /workspaces/esp/esp-idf/components/esp_hw_support/cpu.c:64
+#1  0x4012db9d in esp_vApplicationIdleHook () at /workspaces/esp/esp-idf/components/esp_system/freertos_hooks.c:58
+#2  0x40086c43 in prvIdleTask (pvParameters=&lt;optimized out&gt;) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:4350
+#3  0x40085f54 in vPortTaskWrapper (pxCode=0x40086bb0 &lt;prvIdleTask&gt;, pvParameters=0x0) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+
+==================== THREAD 4 (TCB: 0x3ffafe9c, name: &#39;IDLE1&#39;) =====================
+#0  0x40083f02 in esp_cpu_wait_for_intr () at /workspaces/esp/esp-idf/components/esp_hw_support/cpu.c:64
+#1  0x4012db9d in esp_vApplicationIdleHook () at /workspaces/esp/esp-idf/components/esp_system/freertos_hooks.c:58
+#2  0x40086c43 in prvIdleTask (pvParameters=&lt;optimized out&gt;) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:4350
+#3  0x40085f54 in vPortTaskWrapper (pxCode=0x40086bb0 &lt;prvIdleTask&gt;, pvParameters=0x0) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+
+==================== THREAD 5 (TCB: 0x3ffb8ad8, name: &#39;RandomTask&#39;) =====================
+#0  0x40083ac8 in crosscore_int_ll_trigger_interrupt (core_id=0) at /workspaces/esp/esp-idf/components/hal/esp32/include/hal/crosscore_int_ll.h:35
+#1  esp_crosscore_int_send (core_id=0, reason_mask=1) at /workspaces/esp/esp-idf/components/esp_system/crosscore_int.c:120
+#2  0x40083ae4 in esp_crosscore_int_send_yield (core_id=0) at /workspaces/esp/esp-idf/components/esp_system/crosscore_int.c:125
+#3  0x40086ec5 in vTaskDelay (xTicksToDelay=100) at /workspaces/esp/esp-idf/components/xtensa/include/xt_utils.h:41
+#4  0x400da2ed in RandomTask (pvParameters=&lt;optimized out&gt;) at /workspaces/esp/esp32-guru-upload/main/dummy_app.c:47
+#5  0x40085f54 in vPortTaskWrapper (pxCode=0x400da178 &lt;RandomTask&gt;, pvParameters=0x0) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+
+==================== THREAD 6 (TCB: 0x3ffaf214, name: &#39;ipc0&#39;) =====================
+#0  0x4000bff0 in _xtos_set_intlevel ()
+#1  0x40086265 in vPortClearInterruptMaskFromISR (prev_level=&lt;optimized out&gt;) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/include/freertos/portmacro.h:560
+#2  vPortExitCritical (mux=0x3ffb0118 &lt;xKernelLock&gt;) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:514
+#3  0x400880db in ulTaskGenericNotifyTake (uxIndexToWait=0, xClearCountOnExit=1, xTicksToWait=4294967295) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:5768
+#4  0x4008190a in ipc_task (arg=0x0) at /workspaces/esp/esp-idf/components/esp_system/esp_ipc.c:62
+#5  0x40085f54 in vPortTaskWrapper (pxCode=0x400818c8 &lt;ipc_task&gt;, pvParameters=0x0) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+
+==================== THREAD 7 (TCB: 0x3ffaf8e0, name: &#39;esp_timer&#39;) =====================
+#0  0x4000bff0 in _xtos_set_intlevel ()
+#1  0x40086265 in vPortClearInterruptMaskFromISR (prev_level=&lt;optimized out&gt;) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/include/freertos/portmacro.h:560
+#2  vPortExitCritical (mux=0x3ffb0118 &lt;xKernelLock&gt;) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:514
+#3  0x400880db in ulTaskGenericNotifyTake (uxIndexToWait=0, xClearCountOnExit=1, xTicksToWait=4294967295) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:5768
+#4  0x400df83e in timer_task (arg=&lt;optimized out&gt;) at /workspaces/esp/esp-idf/components/esp_timer/src/esp_timer.c:459
+#5  0x40085f54 in vPortTaskWrapper (pxCode=0x400df824 &lt;timer_task&gt;, pvParameters=0x0) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+
+==================== THREAD 8 (TCB: 0x3ffaf77c, name: &#39;ipc1&#39;) =====================
+#0  0x4000bff0 in _xtos_set_intlevel ()
+#1  0x40086265 in vPortClearInterruptMaskFromISR (prev_level=&lt;optimized out&gt;) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/include/freertos/portmacro.h:560
+#2  vPortExitCritical (mux=0x3ffb0118 &lt;xKernelLock&gt;) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:514
+#3  0x400880db in ulTaskGenericNotifyTake (uxIndexToWait=0, xClearCountOnExit=1, xTicksToWait=4294967295) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:5768
+#4  0x4008190a in ipc_task (arg=0x1) at /workspaces/esp/esp-idf/components/esp_system/esp_ipc.c:62
+#5  0x40085f54 in vPortTaskWrapper (pxCode=0x400818c8 &lt;ipc_task&gt;, pvParameters=0x1) at /workspaces/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+
+
+======================= ALL MEMORY REGIONS ========================
+Name   Address   Size   Attrs
+.rtc.text 0x400c0000 0x0 RW
+.rtc.dummy 0x3ff80000 0x0 RW
+.rtc.force_fast 0x3ff80000 0x0 RW
+.rtc_noinit 0x50000000 0x0 RW
+.rtc.force_slow 0x50000000 0x20 RW A
+.rtc_fast_reserved 0x3ff82000 0x0 RW
+.iram0.vectors 0x40080000 0x404 R XA
+.iram0.text 0x40080404 0xcfcb R XA
+.dram0.data 0x3ffb0000 0x29c0 RW A
+.ext_ram_noinit 0x3f800000 0x0 RW
+.ext_ram.bss 0x3f800000 0x0 RW
+.flash.appdesc 0x3f400020 0x100 R  A
+.flash.rodata 0x3f400120 0x1c91c RW A
+.flash.text 0x400d0020 0x5ed10 R XA
+.iram0.data 0x4008d3d0 0x0 RW
+.iram0.bss 0x4008d3d0 0x0 RW
+.dram0.heap_start 0x3ffb4a18 0x0 RW
+.coredump.tasks.data 0x3ffb94b0 0x154 RW
+.coredump.tasks.data 0x3ffb9340 0x160 RW
+.coredump.tasks.data 0x3ffafbd4 0x154 RW
+.coredump.tasks.data 0x3ffb6b10 0x2b0 RW
+.coredump.tasks.data 0x3ffafd38 0x154 RW
+.coredump.tasks.data 0x3ffb7220 0x1a0 RW
+.coredump.tasks.data 0x3ffafe9c 0x154 RW
+.coredump.tasks.data 0x3ffb7830 0x1a0 RW
+.coredump.tasks.data 0x3ffb8ad8 0x154 RW
+.coredump.tasks.data 0x3ffb8900 0x1d0 RW
+.coredump.tasks.data 0x3ffaf214 0x154 RW
+.coredump.tasks.data 0x3ffaf040 0x1c0 RW
+.coredump.tasks.data 0x3ffaf8e0 0x154 RW
+.coredump.tasks.data 0x3ffb5bf0 0x1d0 RW
+.coredump.tasks.data 0x3ffaf77c 0x154 RW
+.coredump.tasks.data 0x3ffaf5b0 0x1c0 RW
+
+===================== ESP32 CORE DUMP END =====================
+===============================================================
+Done!
+
+</pre>
+<a href="../" class="btn btn-primary mt-3">Back</a>
+
+</div>
+</body>
+</html>

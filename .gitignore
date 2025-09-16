@@ -61,3 +61,6 @@ build/
 sdkconfig.old
 *.bin
 *.elf
+
+# docs
+!docs/**/**.elf

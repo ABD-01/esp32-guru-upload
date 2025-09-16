@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Coredump</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Coredumps</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" href="../../esp_server">ESP Server</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../">README</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Device Log</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container my-4">
+
+<h1 class="mb-4">Logs:</h1>
+<pre style="background:#212529; color:#f8f9fa; padding:1rem; border-radius:5px; white-space: pre-wrap;">
+<span style="color: #fd7e14;">Generating flash image: /workspaces/esp/esp32-guru-upload/build/qemu_flash.bin</span>
+esptool.py --chip=esp32 merge_bin --output=/workspaces/esp/esp32-guru-upload/build/qemu_flash.bin --fill-flash-size=2MB --flash_mode dio --flash_freq 40m --flash_size 2MB 0x1000 bootloader/bootloader.bin 0x10000 guru-upload.bin 0x8000 partition_table/partition-table.bin
+esptool.py v4.10.dev2
+SHA digest in image updated
+Wrote 0x200000 bytes to file /workspaces/esp/esp32-guru-upload/build/qemu_flash.bin, ready to flash to offset 0x0
+<span style="color: #fd7e14;">Using existing efuse image: /workspaces/esp/esp32-guru-upload/build/qemu_efuse.bin</span>
+<span style="color: #fd7e14;">Running qemu (fg): qemu-system-xtensa -M esp32 -m 4M -drive file=/workspaces/esp/esp32-guru-upload/build/qemu_flash.bin,if=mtd,format=raw -drive file=/workspaces/esp/esp32-guru-upload/build/qemu_efuse.bin,if=none,format=raw,id=efuse -global driver=nvram.esp32.efuse,property=drive,value=efuse -global driver=timer.esp32.timg,property=wdt_disable,value=true -nographic -serial mon:stdio -nic user,hostfwd=tcp::8081-:8080</span>
+Adding SPI flash device
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x12 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7304
+load:0x40078000,len:15916
+ho 0 tail 12 room 4
+load:0x40080400,len:3860
+entry 0x40080638
+<span style="color: #28a745;">I (832) boot: ESP-IDF v5.5.1 2nd stage bootloader</span>
+<span style="color: #28a745;">I (837) boot: compile time Sep 16 2025 11:59:28</span>
+<span style="color: #28a745;">I (838) boot: Multicore bootloader</span>
+<span style="color: #28a745;">I (934) boot: chip revision: v3.0</span>
+<span style="color: #28a745;">I (944) boot.esp32: SPI Speed       : 40MHz</span>
+<span style="color: #28a745;">I (945) boot.esp32: SPI Mode        : DIO</span>
+<span style="color: #28a745;">I (947) boot.esp32: SPI Flash Size : 2MB</span>
+<span style="color: #28a745;">I (969) boot: Enabling RNG early entropy source...</span>
+<span style="color: #28a745;">I (1001) boot: Partition Table:</span>
+<span style="color: #28a745;">I (1001) boot: ## Label            Usage          Type ST Offset   Length</span>
+<span style="color: #28a745;">I (1003) boot:  0 nvs              WiFi data       01 02 00009000 00006000</span>
+<span style="color: #28a745;">I (1005) boot:  1 phy_init         RF data         01 01 0000f000 00001000</span>
+<span style="color: #28a745;">I (1006) boot:  2 factory          factory app     00 00 00010000 00100000</span>
+<span style="color: #28a745;">I (1007) boot:  3 coredump         Unknown data    01 03 00110000 00010000</span>
+<span style="color: #28a745;">I (1019) boot: End of partition table</span>
+<span style="color: #28a745;">I (1111) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=1c9fch (117244) map</span>
+<span style="color: #28a745;">I (1231) esp_image: segment 1: paddr=0002ca24 vaddr=3ffb0000 size=029c0h ( 10688) load</span>
+<span style="color: #28a745;">I (1278) esp_image: segment 2: paddr=0002f3ec vaddr=40080000 size=00c2ch (  3116) load</span>
+<span style="color: #28a745;">I (1329) esp_image: segment 3: paddr=00030020 vaddr=400d0020 size=5ed08h (388360) map</span>
+<span style="color: #28a745;">I (1626) esp_image: segment 4: paddr=0008ed30 vaddr=40080c2c size=0c7a4h ( 51108) load</span>
+<span style="color: #28a745;">I (1703) esp_image: segment 5: paddr=0009b4dc vaddr=50000000 size=00020h (    32) load</span>
+<span style="color: #28a745;">I (1821) boot: Loaded app from partition at offset 0x10000</span>
+<span style="color: #28a745;">I (1822) boot: Disabling RNG early entropy source...</span>
+<span style="color: #28a745;">I (1882) cpu_start: Multicore app</span>
+<span style="color: #28a745;">I (3439) cpu_start: Pro cpu start user code</span>
+<span style="color: #28a745;">I (3443) cpu_start: cpu freq: 160000000 Hz</span>
+<span style="color: #28a745;">I (3445) app_init: Application information:</span>
+<span style="color: #28a745;">I (3446) app_init: Project name:     guru-upload</span>
+<span style="color: #28a745;">I (3447) app_init: App version:      a2a85d1</span>
+<span style="color: #28a745;">I (3448) app_init: Compile time:     Sep 16 2025 11:59:20</span>
+<span style="color: #28a745;">I (3449) app_init: ELF file SHA256:  5c57a2754...</span>
+<span style="color: #28a745;">I (3450) app_init: ESP-IDF:          v5.5.1</span>
+<span style="color: #28a745;">I (3451) efuse_init: Min chip rev:     v0.0</span>
+<span style="color: #28a745;">I (3452) efuse_init: Max chip rev:     v3.99 </span>
+<span style="color: #28a745;">I (3453) efuse_init: Chip rev:         v3.0</span>
+<span style="color: #28a745;">I (3459) heap_init: Initializing. RAM available for dynamic allocation:</span>
+<span style="color: #28a745;">I (3462) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM</span>
+<span style="color: #28a745;">I (3465) heap_init: At 3FFB4A18 len 0002B5E8 (173 KiB): DRAM</span>
+<span style="color: #28a745;">I (3466) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM</span>
+<span style="color: #28a745;">I (3467) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM</span>
+<span style="color: #28a745;">I (3469) heap_init: At 4008D3D0 len 00012C30 (75 KiB): IRAM</span>
+<span style="color: #28a745;">I (3585) spi_flash: detected chip: winbond</span>
+<span style="color: #28a745;">I (3600) spi_flash: flash io: dio</span>
+<span style="color: #28a745;">I (3628) esp_core_dump_flash: Init core dump to flash</span>
+<span style="color: #28a745;">I (3680) esp_core_dump_flash: Found partition 'coredump' @ 110000 65536 bytes</span>
+<span style="color: #28a745;">I (3723) main_task: Started on CPU0</span>
+<span style="color: #28a745;">I (3743) main_task: Calling app_main()</span>
+<span style="color: #28a745;">I (3753) dummy_sys: System Heartbeat Tick: 978006334</span>
+<span style="color: #fd7e14;">W (3775) main_app: No coredump file found. esp_core_dump_image_get() returned 260</span>
+<span style="color: #28a745;">I (4753) dummy_gpio: Toggling LED Num 0</span>
+<span style="color: #28a745;">I (5763) dummy_sens: Pressure Sensor Reading: 227</span>
+<span style="color: #28a745;">I (5777) crash_app: foo called with 120</span>
+<span style="color: #28a745;">I (5778) crash_app: bar called with 120</span>
+<span style="color: #28a745;">I (5779) crash_app: baz called with 152</span>
+<span style="color: #28a745;">I (5806) crash_app: foo called with 50</span>
+<span style="color: #28a745;">I (5807) crash_app: bar called with 50</span>
+<span style="color: #28a745;">I (5808) crash_app: baz called with 82</span>
+<span style="color: #dc3545;">E (5809) crash_app: Crashing now! val=82</span>
+Guru Meditation Error: Core  0 panic'ed (LoadProhibited). Exception was unhandled.
+
+Core  0 register dump:
+PC      : 0x400da38f  PS      : 0x00060f30  A0      : 0x80085f54  A1      : 0x3ffb9400
+A2      : 0xac769185  A3      : 0x00000052  A4      : 0x3ffb33c4  A5      : 0xdeadbeef
+A6      : 0x00000013  A7      : 0x3f415ae4  A8      : 0x800da38c  A9      : 0x3ffb9370
+A10     : 0x00000034  A11     : 0x00000034  A12     : 0x00000010  A13     : 0xffffffff
+A14     : 0x00000000  A15     : 0xfffffffd  SAR     : 0x00000004  EXCCAUSE: 0x0000001c
+EXCVADDR: 0xdeadbeef  LBEG    : 0x00000000  LEND    : 0x00000000  LCOUNT  : 0x00000000
+
+
+Backtrace: 0x400da38c:0x3ffb9400 0x40085f51:0x3ffb9420
+
+
+
+
+ELF file SHA256: 5c57a2754
+
+<span style="color: #28a745;">I (5840) esp_core_dump_flash: Save core dump to flash...</span>
+<span style="color: #28a745;">I (5852) esp_core_dump_flash: Erase flash 16384 bytes @ 0x110000</span>
+<span style="color: #28a745;">I (11499) esp_core_dump_flash: Write end offset 0x3264, check sum length 4</span>
+<span style="color: #28a745;">I (11501) esp_core_dump_flash: Core dump has been saved to flash.</span>
+Rebooting...
+ets Jul 29 2019 12:21:46
+
+rst:0xc (SW_CPU_RESET),boot:0x12 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7304
+load:0x40078000,len:15916
+ho 0 tail 12 room 4
+load:0x40080400,len:3860
+entry 0x40080638
+<span style="color: #28a745;">I (27693) boot: ESP-IDF v5.5.1 2nd stage bootloader</span>
+<span style="color: #28a745;">I (27694) boot: compile time Sep 16 2025 11:59:28</span>
+<span style="color: #28a745;">I (27695) boot: Multicore bootloader</span>
+<span style="color: #28a745;">I (27784) boot: chip revision: v3.0</span>
+<span style="color: #28a745;">I (27793) boot.esp32: SPI Speed       : 40MHz</span>
+<span style="color: #28a745;">I (27794) boot.esp32: SPI Mode        : DIO</span>
+<span style="color: #28a745;">I (27795) boot.esp32: SPI Flash Size : 2MB</span>
+<span style="color: #28a745;">I (27816) boot: Enabling RNG early entropy source...</span>
+<span style="color: #28a745;">I (27847) boot: Partition Table:</span>
+<span style="color: #28a745;">I (27848) boot: ## Label            Usage          Type ST Offset   Length</span>
+<span style="color: #28a745;">I (27849) boot:  0 nvs              WiFi data       01 02 00009000 00006000</span>
+<span style="color: #28a745;">I (27850) boot:  1 phy_init         RF data         01 01 0000f000 00001000</span>
+<span style="color: #28a745;">I (27852) boot:  2 factory          factory app     00 00 00010000 00100000</span>
+<span style="color: #28a745;">I (27853) boot:  3 coredump         Unknown data    01 03 00110000 00010000</span>
+<span style="color: #28a745;">I (27866) boot: End of partition table</span>
+<span style="color: #28a745;">I (27958) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=1c9fch (117244) map</span>
+<span style="color: #28a745;">I (28081) esp_image: segment 1: paddr=0002ca24 vaddr=3ffb0000 size=029c0h ( 10688) load</span>
+<span style="color: #28a745;">I (28129) esp_image: segment 2: paddr=0002f3ec vaddr=40080000 size=00c2ch (  3116) load</span>
+<span style="color: #28a745;">I (28179) esp_image: segment 3: paddr=00030020 vaddr=400d0020 size=5ed08h (388360) map</span>
+<span style="color: #28a745;">I (28489) esp_image: segment 4: paddr=0008ed30 vaddr=40080c2c size=0c7a4h ( 51108) load</span>
+<span style="color: #28a745;">I (28614) esp_image: segment 5: paddr=0009b4dc vaddr=50000000 size=00020h (    32) load</span>
+<span style="color: #28a745;">I (28733) boot: Loaded app from partition at offset 0x10000</span>
+<span style="color: #28a745;">I (28735) boot: Disabling RNG early entropy source...</span>
+<span style="color: #28a745;">I (28803) cpu_start: Multicore app</span>
+<span style="color: #28a745;">I (13155) cpu_start: Pro cpu start user code</span>
+<span style="color: #28a745;">I (13156) cpu_start: cpu freq: 160000000 Hz</span>
+<span style="color: #28a745;">I (13157) app_init: Application information:</span>
+<span style="color: #28a745;">I (13158) app_init: Project name:     guru-upload</span>
+<span style="color: #28a745;">I (13160) app_init: App version:      a2a85d1</span>
+<span style="color: #28a745;">I (13161) app_init: Compile time:     Sep 16 2025 11:59:20</span>
+<span style="color: #28a745;">I (13162) app_init: ELF file SHA256:  5c57a2754...</span>
+<span style="color: #28a745;">I (13163) app_init: ESP-IDF:          v5.5.1</span>
+<span style="color: #28a745;">I (13164) efuse_init: Min chip rev:     v0.0</span>
+<span style="color: #28a745;">I (13165) efuse_init: Max chip rev:     v3.99 </span>
+<span style="color: #28a745;">I (13167) efuse_init: Chip rev:         v3.0</span>
+<span style="color: #28a745;">I (13173) heap_init: Initializing. RAM available for dynamic allocation:</span>
+<span style="color: #28a745;">I (13176) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM</span>
+<span style="color: #28a745;">I (13178) heap_init: At 3FFB4A18 len 0002B5E8 (173 KiB): DRAM</span>
+<span style="color: #28a745;">I (13179) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM</span>
+<span style="color: #28a745;">I (13180) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM</span>
+<span style="color: #28a745;">I (13182) heap_init: At 4008D3D0 len 00012C30 (75 KiB): IRAM</span>
+<span style="color: #28a745;">I (13305) spi_flash: detected chip: winbond</span>
+<span style="color: #28a745;">I (13321) spi_flash: flash io: dio</span>
+<span style="color: #28a745;">I (13348) esp_core_dump_flash: Init core dump to flash</span>
+<span style="color: #28a745;">I (13397) esp_core_dump_flash: Found partition 'coredump' @ 110000 65536 bytes</span>
+<span style="color: #28a745;">I (18993) esp_core_dump_flash: Core dump data checksum is correct</span>
+<span style="color: #28a745;">I (19009) esp_core_dump_flash: Found core dump 12900 bytes in flash @ 0x110000</span>
+<span style="color: #28a745;">I (19033) main_task: Started on CPU0</span>
+<span style="color: #28a745;">I (19063) main_task: Calling app_main()</span>
+<span style="color: #fd7e14;">W (19063) dummy_sys: Noise Data Sample: 1707693383</span>
+<span style="color: #fd7e14;">W (19087) main_app: Coredump file found at address 0x00110000 with size 12900 bytes</span>
+<span style="color: #28a745;">I (20003) esp_eth.netif.netif_glue: 52:54:00:12:34:56</span>
+<span style="color: #28a745;">I (20013) esp_eth.netif.netif_glue: ethernet attached to netif</span>
+<span style="color: #28a745;">I (20063) dummy_sys: Random Debug Event ID: 141</span>
+<span style="color: #28a745;">I (20113) ethernet_connect: Waiting for IP(s).</span>
+<span style="color: #28a745;">I (21063) dummy_gpio: Toggling LED Num 10</span>
+<span style="color: #28a745;">I (21153) esp_netif_handlers: example_netif_eth ip: 10.0.2.15, mask: 255.255.255.0, gw: 10.0.2.2</span>
+<span style="color: #28a745;">I (21153) ethernet_connect: Got IPv4 event: Interface "example_netif_eth" address: 10.0.2.15</span>
+<span style="color: #28a745;">I (21153) example_common: Connected to example_netif_eth</span>
+<span style="color: #28a745;">I (21163) example_common: - IPv4 address: 10.0.2.15,</span>
+<span style="color: #28a745;">I (22063) dummy_sens: Pressure Sensor Reading: 699</span>
+<span style="color: #28a745;">I (23063) dummy_sys: Random Debug Event ID: 85</span>
+<span style="color: #28a745;">I (24063) dummy_battery: Battery Voltage: 1852 mV</span>
+<span style="color: #28a745;">I (25063) dummy_gpio: Toggling LED Num 4</span>
+<span style="color: #28a745;">I (26063) dummy_battery: Battery Voltage: 2876 mV</span>
+<span style="color: #28a745;">I (27063) dummy_battery: Battery Voltage: 3548 mV</span>
+<span style="color: #fd7e14;">W (28063) dummy_sys: Noise Data Sample: -1024957569</span>
+<span style="color: #fd7e14;">W (29063) dummy_sys: Noise Data Sample: -1541400001</span>
+<span style="color: #28a745;">I (30063) dummy_gpio: Toggling LED Num 8</span>
+<span style="color: #28a745;">I (31063) dummy_sens: Pressure Sensor Reading: 955</span>
+<span style="color: #28a745;">I (4336) upload_task: Coredump size: 12900 bytes</span>
+<span style="color: #28a745;">I (4337) upload_task: Reading coredump from partition 'coredump'</span>
+<span style="color: #28a745;">I (4499) upload_task: Uploaded 1024/12900 bytes</span>
+<span style="color: #28a745;">I (4551) upload_task: Uploaded 2048/12900 bytes</span>
+<span style="color: #28a745;">I (4601) upload_task: Uploaded 3072/12900 bytes</span>
+<span style="color: #28a745;">I (4661) upload_task: Uploaded 4096/12900 bytes</span>
+<span style="color: #28a745;">I (4717) upload_task: Uploaded 5120/12900 bytes</span>
+<span style="color: #28a745;">I (4770) upload_task: Uploaded 6144/12900 bytes</span>
+<span style="color: #28a745;">I (4822) upload_task: Uploaded 7168/12900 bytes</span>
+<span style="color: #28a745;">I (4874) upload_task: Uploaded 8192/12900 bytes</span>
+<span style="color: #28a745;">I (2931) upload_task: Uploaded 9216/12900 bytes</span>
+<span style="color: #28a745;">I (4992) upload_task: Uploaded 10240/12900 bytes</span>
+<span style="color: #28a745;">I (31873) main_task: Returned from app_main()</span>
+<span style="color: #28a745;">I (3052) upload_task: Uploaded 11264/12900 bytes</span>
+<span style="color: #28a745;">I (3119) upload_task: Uploaded 12288/12900 bytes</span>
+<span style="color: #28a745;">I (5180) upload_task: Uploaded 12900/12900 bytes</span>
+<span style="color: #28a745;">I (32063) dummy_gps: Found GPS Latitude: 39605, Longitude: 57057</span>
+<span style="color: #28a745;">I (3234) http_service: Response content length: 30</span>
+<span style="color: #28a745;">I (3235) http_service: Response status = 200</span>
+<span style="color: #28a745;">I (3237) http_service: Response body:</span>
+    Saved coredump-1758027250.elf
+
+
+<span style="color: #28a745;">I (5252) upload_task: Upload finished, status = 200</span>
+<span style="color: #28a745;">I (5331) upload_task: Coredump erased successfully</span>
+<span style="color: #28a745;">I (33073) dummy_sys: Random Debug Event ID: 245</span>
+<span style="color: #28a745;">I (34073) dummy_gpio: Toggling LED Num 0</span>
+<span style="color: #28a745;">I (35073) dummy_gpio: Toggling LED Num 4</span>
+<span style="color: #28a745;">I (36073) dummy_battery: Battery Voltage: 4348 mV</span>
+<span style="color: #28a745;">I (37073) dummy_sys: System Heartbeat Tick: 331504894</span>
+<span style="color: #28a745;">I (38073) dummy_gpio: Toggling LED Num 6</span>
+<span style="color: #28a745;">I (39073) dummy_gpio: Toggling LED Num 12</span>
+<span style="color: #28a745;">I (40073) dummy_sens: Pressure Sensor Reading: 603</span>
+<span style="color: #28a745;">I (41073) dummy_sens: Pressure Sensor Reading: 331</span>
+</pre>
+
+</div>
+</body>
+</html>
