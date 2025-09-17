@@ -4,7 +4,8 @@ Upload Guru Meditation crashdumps from an ESP32 to a Flask server endpoint.
 
 ESP32 firmware captures crashdumps from the dedicated coredump partition.
 
-Crashdumps are uploaded via HTTP POST to a Flask server.
+Crashdumps are uploaded via HTTP POST to a [Flask server](https://abd-01.github.io/esp32-guru-upload/coredump/)
+
 
 ## How To
 
@@ -35,12 +36,14 @@ cd esp32-guru-upload
 python endpoint_app.py
 ```
 
-* Flask server will run at `http://localhost:8080/`.
+* Flask server will run at [`http://localhost:8080/`](https://abd-01.github.io/esp32-guru-upload/coredump/).
+
+***Demo view of the server: [abd-01.github.io/esp32-guru-upload](https://abd-01.github.io/esp32-guru-upload/coredump/)***
 
 ### 4. Access the Web UI
 
 Visit:
-[http://localhost:8080/](http://localhost:8080/) or the GitHub Codespaces-provided URL.
+[http://localhost:8080/](https://abd-01.github.io/esp32-guru-upload/coredump/) or the GitHub Codespaces-provided URL.
 
 ## Overview
 
@@ -78,7 +81,7 @@ abd-01-esp32-guru-upload/
 
 I was recently working on Hardfault Diagnostics for ARM Cortex-M, which could create crashlogs in the event of a Hardfault.
 
-My work is in progress and can be viewed [here](https://github.com/ABD-01/symmetric-pancake).
+My work is in progress and can be viewed [here](https://github.com/ABD-01/hardfault-coredump-arm-cortex-m).
 
 I would have eventually looked into ESP32, however, this gave me the chance to get into the [Guru Meditation](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-guides/fatal-errors.html) earlier.
 
@@ -118,7 +121,7 @@ I have set up all the installation into the devcontainer so you don't have to wo
 
 For a Guru Meditation to be triggered, there has to be a piece of notorious code.
 
-I have written [crash\_app.c](main/crash_app.c), which just calls a few functions (to showcase stack depth) and writes to a prohibited location:
+I have written [crash\_app.c](https://github.com/ABD-01/esp32-guru-upload/blob/master/main/crash_app.c), which just calls a few functions (to showcase stack depth) and writes to a prohibited location:
 
 ```c
 ==================== THREAD 1 (TCB: 0x3ffb94b0, name: 'CrashTask') =====================
@@ -129,7 +132,9 @@ I have written [crash\_app.c](main/crash_app.c), which just calls a few function
 #4  0x40085f54 in vPortTaskWrapper (pxCode=0x400da2f0 <CrashTask>, pvParameters=0x0) at esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
 ```
 
-[ESP-IDF (Espressif IoT Development Framework)](https://github.com/espressif/esp-idf) through its `menuconfig` provides an option for coredumps to be sent over UART or saved in Flash. See [sdkconfig](./sdkconfig) or run `idf.py menuconfig`:
+***Visit [abd-01.github.io/esp32-guru-upload/device_log](https://abd-01.github.io/esp32-guru-upload/device_log/) for complete logs.***
+
+[ESP-IDF (Espressif IoT Development Framework)](https://github.com/espressif/esp-idf) through its `menuconfig` provides an option for coredumps to be sent over UART or saved in Flash. See [sdkconfig](https://github.com/ABD-01/esp32-guru-upload/blob/master/sdkconfig) or run `idf.py menuconfig`:
 
 ```
 # Core dump
@@ -148,22 +153,22 @@ CONFIG_ESP_COREDUMP_MAX_TASKS_NUM=64
 
 Coredump-related public APIs can be used by including [esp\_core\_dump.h](https://github.com/espressif/esp-idf/blob/master/components/espcoredump/include/esp_core_dump.h).
 
-[guru\_upload.c](main/guru-upload.c) is the main file of the project implementing `app_main`, and the first thing it does is check if a coredump exists in flash:
+[guru\_upload.c](https://github.com/ABD-01/esp32-guru-upload/blob/master/main/guru-upload.c) is the main file of the project implementing `app_main`, and the first thing it does is check if a coredump exists in flash:
 
 ```c
 esp_err_t err = esp_core_dump_image_get(&addr, &size);
 ```
 
-If a coredump is found, `UploadCoredumpTask` is invoked as a separate RTOS task (implementation in [upload\_coredump\_app.c](main/upload_coredump_app.c)).
+If a coredump is found, `UploadCoredumpTask` is invoked as a separate RTOS task (implementation in [upload\_coredump\_app.c](https://github.com/ABD-01/esp32-guru-upload/blob/master/main/upload_coredump_app.c)).
 
-Other than that, [guru\_upload.c](main/guru-upload.c) starts a dummy application (which just prints logs based on a pseudorandom number) and an HTTP webserver that responds with *"Hello from ESP32"*.
+Other than that, [guru\_upload.c](https://github.com/ABD-01/esp32-guru-upload/blob/master/main/guru-upload.c) starts a dummy application (which just prints logs based on a pseudorandom number) and an HTTP webserver that responds with *"Hello from ESP32"*.
 
 ***The project, instead of being created from scratch, was created using the [HTTP Request Example](https://github.com/espressif/esp-idf/tree/master/examples/protocols/http_request) template.***
 
 The HTTP client operations are also inspired by the provided examples.
 See [esp\_http\_client\_example.c#http\_native\_request](https://github.com/espressif/esp-idf/blob/f38b8fec92a0e389b733cb4fbf49be86e5144333/examples/protocols/esp_http_client/main/esp_http_client_example.c#L763-L792).
 
-[upload\_coredump\_app.c](main/upload_coredump_app.c) reads the coredump saved in flash and posts it chunk by chunk to the server:
+[upload\_coredump\_app.c](https://github.com/ABD-01/esp32-guru-upload/blob/master/main/upload_coredump_app.c) reads the coredump saved in flash and posts it chunk by chunk to the server:
 
 ```c
 coredump = esp_partition_find_first(ESP_PARTITION_TYPE_DATA, ESP_PARTITION_SUBTYPE_DATA_COREDUMP, NULL);
@@ -173,13 +178,17 @@ http_upload_send_chunk(client, buffer, buffer_size);
 
 ### Server
 
-I had a fair share of experience with Flask, and having worked with connected vehicle protocols and protobuf, I also put together a Flask-based server where I can upload the coredump data. See [endpoint\_app.py](./endpoint_app.py) for internal details.
+I had a fair share of experience with Flask, and having worked with connected vehicle protocols and protobuf, I also put together a Flask-based server where I can upload the coredump data. See [endpoint\_app.py](https://github.com/ABD-01/esp32-guru-upload/blob/master/endpoint_app.py) for internal details.
 
-[http://localhost:8080/](http://localhost:8080/) displays the list of coredumps received.
-[http://localhost:8080/coredump/coredump-\<timestamp>.elf](http://localhost:8080/) will run `esp_coredump` on the file and display the results.
+[http://localhost:8080/](https://abd-01.github.io/esp32-guru-upload/coredump/) displays the list of coredumps received.
+[http://localhost:8080/coredump/coredump-\<timestamp>.elf](https://abd-01.github.io/esp32-guru-upload/coredump/coredump-1758023059.elf/) will run `esp_coredump` on the file and display the results.
 
-[http://localhost:8080/upload](http://localhost:8080/) is the endpoint that receives the coredump via POST method.
+***For demo visit: [abd-01.github.io/esp32-guru-upload/coredump/coredump-1758023059.elf](https://abd-01.github.io/esp32-guru-upload/coredump/coredump-1758023059.elf)***
+
+[http://localhost:8080/upload](https://abd-01.github.io/esp32-guru-upload/coredump/) is the endpoint that receives the coredump via POST method.
+
+The ESP32 is also running an HTTP server which can be viewed at [http://localhost:8080/esp_server](https://abd-01.github.io/esp32-guru-upload/esp_server/)
 
 ## License
 
-GNU Affero General Public License v3.0 (AGPL-3.0). See [LICENSE](LICENSE) for details.
+GNU Affero General Public License v3.0 (AGPL-3.0). See [LICENSE](https://github.com/ABD-01/esp32-guru-upload/blob/master/LICENSE) for details.
