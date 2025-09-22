@@ -9,8 +9,11 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="../coredump/">Coredumps</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav me-auto">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">            <ul class="navbar-nav me-auto">
                 <li class="nav-item"><a class="nav-link" href="../esp_server">ESP Server</a></li>
                 <li class="nav-item"><a class="nav-link" href="../">README</a></li>
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Device Log</a></li>
@@ -240,5 +243,6 @@ entry 0x40080638
 </pre>
 
 </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>
